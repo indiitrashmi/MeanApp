@@ -1,29 +1,31 @@
 <div class="content-start">
   <mat-card>
-    <!-- <form class="create-form"> -->
+    <form class="create-form" (submit)="onAddPost(postForm)" #postForm="ngForm">
       <div class="container text-center">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
               <h2>Add Post</h2>
             </div>
-              <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="col-lg-12 col-md-12 col-sm-12 mb-2">
                 <mat-form-field appearance="fill" class="w-100">
                   <mat-label>Title</mat-label>
-                  <input matInput placeholder="Add a title" [(ngModel)]="enteredTitle">
+                  <input matInput placeholder="Add a title" ngModel name="title" required #title="ngModel">
+                  <mat-error *ngIf="title.invalid">Please enter title</mat-error>
                 </mat-form-field>
               </div>
-              <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="col-lg-12 col-md-12 col-sm-12 mb-2">
                 <mat-form-field appearance="fill" class="w-100">
                   <mat-label>Content</mat-label>
-                  <textarea matInput placeholder="Add post content" [(ngModel)]="enteredContent"></textarea>
+                  <textarea matInput placeholder="Add post content" ngModel name="content" required #content="ngModel"></textarea>
+                  <mat-error *ngIf="content.invalid">Please enter content</mat-error>
                 </mat-form-field>
               </div>
               <div class="col-lg-12 col-md-12 col-sm-12">
-                <button mat-raised-button color="primary" (click)='onAddPost()'>Save</button>
+                <button mat-raised-button color="primary" type="submit">Save</button>
               </div>
         </div>
       </div>
-    <!-- </form> -->
+    </form>
   </mat-card>
 
   <hr class="my-3">
