@@ -1,0 +1,6 @@
+.mat-card:not([class*=mat-elevation-z]) {
+  box-shadow: none;
+}
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: rgb(255 255 255);
+}
