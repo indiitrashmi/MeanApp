@@ -10,7 +10,7 @@ const app = express(); //creating express instance to use its methods and proper
 
 
 //Database connection using mongoose connect() function
-mongoose.connect('mongodb+srv://Rashmi:OqQI9xucq88JdsHA@cluster0.bd5ev.mongodb.net/nodeangular?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://Rashmi:OqQI9xucq88JdsHA@cluster0.bd5ev.mongodb.net/meanappdb?retryWrites=true&w=majority')
 .then(() => {
    console.log("Connected to database");
 })
