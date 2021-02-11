@@ -10,13 +10,17 @@ const app = express(); //creating express instance to use its methods and proper
 
 
 //Database connection using mongoose connect() function
-mongoose.connect('')
-.then(() => {
-   console.log("Connected to database");
-})
-.catch(() => {
-   console.log("Connection failed");
-});
+mongoose
+ .connect(
+   "mongodb+srv://Rashmi:OqQI9xucq88JdsHA@cluster0.bd5ev.mongodb.net/meanappdb?w=majority",
+     {useNewUrlParser: true, useUnifiedTopology: true}
+ )
+ .then(() => {
+   console.log("Connected to database!");
+ })
+ .catch(() => {
+   console.log("Connection failed!");
+ });
 
 
 // Will parse the incoming data
@@ -39,29 +43,32 @@ app.post('/api/posts',(req,res,next) => {
     content:req.body.content
   });
   console.log(post);
-  res.status(201).json({
-    message:"Post added"
+  post.save().then((createdPost) => {
+    res.status(201).json({
+      message:"Post added",
+      postId : createdPost._id
+    });
   });
 });
 
 //for getting list of posts to show on frontend
 app.get('/api/posts',(req,res,next) => {
-  const posts = [];
-  // const posts = [
-  //   {
-  //     id: "vdskbkbk",
-  //     title: "First post",
-  //     content: "This is coming from server"
-  //   },
-  //   {
-  //     id: "vdskbkbk",
-  //     title: "Second post",
-  //     content: "This is coming from server"
-  //   }
-  // ];
- res.status(200).json({
-   message: "Posts fetched!!",
-   posts: posts
+Post.find().then(documents => {
+  res.status(200).json({
+    message: "Posts fetched!!",
+    posts: documents
+  });
+ });
+});
+
+
+//for deleting post
+app.delete('/api/posts/:id',(req,res,next) => {
+ Post.deleteOne({_id:req.params.id}).then( result => {
+   console.log(result);
+   res.status(200).json({
+    message: "deleted post from backend!"
+  });
  });
 });
 

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="padding-bottom: 100px;">
   <div class="col-md-12 px-0">
     <mat-accordion *ngIf="posts.length>0">
       <mat-expansion-panel class="mb-1" hideToggle *ngFor="let post of posts">
@@ -13,7 +13,7 @@
         <p>{{post.content}}</p>
         <mat-action-row>
           <button mat-button color="primary">EDIT</button>
-          <button mat-button color="accent">DELETE</button>
+          <button mat-button color="accent" (click)="onDelete(post.id)">DELETE</button>
         </mat-action-row>
       </mat-expansion-panel>
     </mat-accordion>
